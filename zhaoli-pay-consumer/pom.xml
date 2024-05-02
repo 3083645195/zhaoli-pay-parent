@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.zhaoli</groupId>
+        <artifactId>zhaoli-pay-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>zhaoli.com</groupId>
+    <artifactId>zhaoli-pay-consumer</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- 是一个用于微信公众号开发的 Java SDK，它提供了丰富的功能和API，以便于开发者与微信公众号进行交互和开发定制化的功能
+             使用weixin-java-mp可以方便地实现微信公众号的开发，包括接收用户消息、发送客服消息、菜单管理、用户管理、素材管理等功能。
+             通过该 SDK，开发者可以更便捷地处理微信公众号的开发工作，提供更加丰富和个性化的用户体验-->
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-mp</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+        <!-- 在 Spring Boot 项目中引入 AMQP（高级消息队列协议）相关的依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        <!--整合mysql 使用 MySQL 数据库驱动程序 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.5.1</version>
+        </dependency>
+        <!-- mybatis-plus-generator  MyBatis 代码生成器，也称为代码自动生成工具，
+             可以帮助开发者自动生成实体类、Mapper 接口和 Mapper XML 文件，并提高代码质量和生产效率 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.5.2</version>
+        </dependency>
+        <!-- mybatis-plus-generator 需要引入velocity-engine-core 否则会报错
+             MyBatis-Plus Generator 用于代码生成的模板引擎，用于生成Mapper XML文件和其他代码文件-->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>zhaoli.com</groupId>
+            <artifactId>zhaoli-pay-utils</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+</project>

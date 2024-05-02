@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.zhaoli</groupId>
+    <artifactId>zhaoli-pay-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>zhaoli-pay-api</module>
+        <module>zhaoli-pay-consumer</module>
+        <module>zhaoli-pay-common</module>
+        <module>zhaoli-pay-job</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <!-- Spring Boot 的父级依赖，用于简化和统一 Spring Boot 项目的依赖管理和构建设置
+      通过声明 spring-boot-starter-parent 作为父依赖，你可以继承其默认配置和依赖管理，从而简化项目配置和减少重复工作 -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.3.RELEASE</version>
+    </parent>
+    <dependencies>
+        <!-- springboot 整合 web 组件
+          它为开发 Web 应用程序提供了 Spring MVC 和嵌入式 Tomcat 服务器的依赖。通过添加这个依赖，你可以很容易地启动一个基于 Spring Boot 的 Web 应用程序
+          可以快速搭建一个基于 Spring Boot 的 Web 应用程序，并使用 Spring MVC 框架进行开发 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- lombok 是一个 Java 库，它可以通过简单的注解来帮助开发人员消除 Java 代码中的样板代码，如 getter、setter、equals、hashCode 等
+          设置<optional>true</optional>，你可以在需要的时候使用 Lombok，而不是强制性地将它包含在项目的构建中 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- 可以在项目中使用 fastjson 来进行 JSON 的解析和序列化操作
+          使用 fastjson 可以轻松地将 Java 对象转换为 JSON 字符串以及将 JSON 字符串转换为 Java 对象。
+          它支持许多高级特性，如自定义序列化和反序列化规则、支持 JSON Path（用于提取和修改 JSON 数据）等 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.73</version>
+        </dependency>
+        <!-- hutool-all 是一个 Java 工具类库，提供了各种实用的工具方法，用于简化 Java 开发中的常见任务
+          Hutool 提供了大量的工具类和方法，涵盖了字符串处理、日期时间处理、加密解密、文件操作、网络请求、JSON/XML 处理、
+          Excel/Word/PDF 处理等等，可以极大地提高 Java 开发的效率和便捷性-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.11</version>
+        </dependency>
+        <!-- 集成 Redis 数据库 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+    </dependencies>
+</project>

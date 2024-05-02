@@ -1,0 +1,38 @@
+zhaoli:
+  pay:
+    ##模板 id
+    notifyMerchantTemplateId: MTRjfzTJLetdjpezc4YcDLgelN7XNpvA63ZgUpRKhXI
+    ##线程池相关配置
+    thread:
+      corePoolSize: 2 # 一直正在运行线程数 2  IO相关 cpu核数*2 cpu相
+      maxPoolSize: 8  #最大线程数
+      queueCapacity: 200  #队列容量
+      keepAlive: 60 #超时时间
+server:
+  ##启动端口号
+  port: 7070
+logging:
+  level:
+    org.springframework.web: INFO
+    com.github.binarywang.demo.wx.mp: DEBUG
+    me.chanjar.weixin: DEBUG
+## 配置微信公众号
+wx:
+  mp:
+    configs:
+      - appId: wxb9b6fb69750f3353
+        secret: 3241510d2156276e8184e1be4dd2eafb
+        token: zhaoli
+spring:
+  ##rabbitmq 相关配置
+  rabbitmq:
+    #连接地址
+    host: 192.168.182.138
+    #端口号
+    port: 5672
+    #账号
+    username: admin
+    #密码
+    password: admin
+    #地址
+    virtual-host: /
