@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>商家入驻-扫码入驻</title>
+        <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--        <script src="http://static.mayikt.com/jquery-1.11.1.min.js?t=2118bbe3-b1d9-44f7-9eb2-eb629674f7de"-->
+<!--                type="text/javascript" charset="utf-8"></script>-->
+        <script src="https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+    </head>
+    <body>
+        <div class="panel panel-default">
+            <div id="qrcode">
+            </div>
+            <div>
+                <span>请打开手机微信扫一扫</span>
+            </div>
+        </div>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <!--代码说明： 发送ajax请求到后端api生产图形验证码 -->
+        <script>
+
+        </script>
+        <script>
+            var qrCodeToken;
+            $(document).ready(function() {
+
+                outputQRCod(100, 100);　　　　　　　　　　//转换中文字符串
+                function toUtf8(str) {
+                    var out, i, len, c;
+                    out = "";
+                    len = str.length;
+                    for (i = 0; i < len; i++) {
+                        c = str.charCodeAt(i);
+                        if ((c >= 0x0001) && (c <= 0x007F)) {
+                            out += str.charAt(i);
+                        } else if (c > 0x07FF) {
+                            out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
+                            out += String.fromCharCode(0x80 | ((c >> 6) & 0x3F));
+                            out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+                        } else {
+                            out += String.fromCharCode(0xC0 | ((c >> 6) & 0x1F));
+                            out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+                        }
+                    }
+                    return out;
+                }
+
+
+                //生成二维码
+                function outputQRCod(width, height) {
+                    $.get("http://127.0.0.1:7070/merchant/gen erateQrCode", function (resp, status) {
+                        if (resp.code == 200) {
+                            //先清空
+                            $("#qrcode").empty();
+                            //中文格式转换
+                            var str = toUtf8(resp.data.url);
+                            //生成二维码
+                            $("#qrcode").qrcode({
+                                render: "canvas",//canvas和table两种渲染方式
+                                width: width,
+                                height: height,
+                                text: str
+                            });
+                            // 获取前端定时查询token
+                            qrCodeToken = resp.data.qrCodeToken;
+
+                        }
+
+                    });
+
+                }
+            })
+            getData();
+            var int = self.setInterval("getData()", 3000);
+            function getData() {
+                if (qrCodeToken != null) {
+                    $.get("http://127.0.0.1:7070/merchant/getQrCodeTokenResult?qrCodeToken=" + qrCodeToken, function (resp, status) {
+                        if (resp.code == 200) {
+                            alert("恭喜微信扫码成功，即将进入商家入驻页面")
+                            window.location.href = "addMerchantQrCode.html?qrCodeToken="+qrCodeToken;
+                        }
+                    });
+                }
+
+            }
+
+
+        </script>
+    </body>
+</html>

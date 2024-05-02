@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>填写商家入驻信息</title>
+    <!-- 引入layui css -->
+    <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui-v2.5.6/css/layui.css"/>
+    <!-- 引入Vue.js -->
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+    <!-- 引入 ajax -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<h1>填写商家入驻信息</h1>
+<div id="app">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <div class="layui-form-item">
+                <label class="layui-form-label">企业名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="enterpriseName" v-model="payMerchantInfoReqDTO.enterpriseName"
+                           id="enterpriseName"
+                           placeholder="请输入" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">企业社会信用代码</label>
+                <div class="layui-input-block">
+                    <input type="text" name="socialCreditCode"
+                           v-model="payMerchantInfoReqDTO.socialCreditCode" id="socialCreditCode" placeholder="请输入"
+                           autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">营业执照图片</label>
+                <div class="layui-input-block">
+                    <input type="text" name="businessLicenseUrl"
+                           v-model="payMerchantInfoReqDTO.businessLicenseUrl" id="businessLicenseUrl"
+                           placeholder="请输入" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">法人</label>
+                <div class="layui-input-block">
+                    <input type="text" name="juridicalPerson"
+                           v-model="payMerchantInfoReqDTO.juridicalPerson" id="juridicalPerson" placeholder="请输入"
+                           autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">法人身份证信息</label>
+                <div class="layui-input-block">
+                    <input type="text" name="juridicalPersonUrl"
+                           v-model="payMerchantInfoReqDTO.juridicalPersonUrl" id="juridicalPersonUrl"
+                           placeholder="请输入" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">联系人</label>
+                <div class="layui-input-block">
+                    <input type="text" name="contacts" v-model="payMerchantInfoReqDTO.contacts"
+                           id="contacts" placeholder="请输入" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">联系人手机号码</label>
+                <div class="layui-input-block">
+                    <input type="text" name="contactNumber"
+                           v-model="payMerchantInfoReqDTO.contactNumber" id="contactNumber" placeholder="请输入"
+                           autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div id="registeErrorInfo"
+                 style="color: red; font-size: 13px; line-height: 30px;height: 30px; ">
+                {{numberErrorStr}}
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input type="button" class="layui-btn" @click="add()" value="立即提交">
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                payMerchantInfoReqDTO: {},
+                numberErrorStr:''
+            }
+        },
+        methods: {
+            add() {
+                var _this = this;
+                var qrCodeToken = getUrlParam("qrCodeToken");
+                _this.payMerchantInfoReqDTO.qrCodeToken = qrCodeToken;
+                axios({
+                    method: "POST",
+                    url: "http://127.0.0.1:7070/merchant/merchantSettlement/",
+                    data: _this.payMerchantInfoReqDTO,
+                    headers: {
+                        'Content-Type': 'application/json;charset=UTF-8'
+                    }
+                }).then(resp => {
+                    var code = resp.data.code;
+                    if (code == "200") {
+                        alert("新增数据成功");
+                        window.location.href = "adminInternshipUnit.html";
+                    } else {
+                        _this.numberErrorStr = resp.data.msg;
+                    }
+                })
+            }
+        }
+    });
+</script>
+</body>
+</html>
