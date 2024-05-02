@@ -11,8 +11,7 @@
     <modules>
         <module>zhaoli-pay-api</module>
         <module>zhaoli-pay-consumer</module>
-        <module>zhaoli-pay-common</module>
-        <module>zhaoli-pay-job</module>
+        <module>zhaoli-pay-utils</module>
     </modules>
 
     <properties>
