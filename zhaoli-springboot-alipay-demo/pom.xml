@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>zhaoli-springboot-alipay-demo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <!-- Spring Boot 的父级依赖，用于简化和统一 Spring Boot 项目的依赖管理和构建设置
+      通过声明 spring-boot-starter-parent 作为父依赖，你可以继承其默认配置和依赖管理，从而简化项目配置和减少重复工作 -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.11.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <dependencies>
+        <!-- springboot 整合 web 组件
+          它为开发 Web 应用程序提供了 Spring MVC 和嵌入式 Tomcat 服务器的依赖。通过添加这个依赖，你可以很容易地启动一个基于 Spring Boot 的 Web 应用程序
+          可以快速搭建一个基于 Spring Boot 的 Web 应用程序，并使用 Spring MVC 框架进行开发 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- Maven 会自动从中央仓库（或者配置的镜像仓库）下载相关的 jar 文件并将其添加到构建路径中。 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+        <!-- 用于集成支付宝的支付接口到项目中，以便进行支付操作、查询订单状态等与支付宝相关的功能 -->
+        <dependency>
+            <groupId>com.alipay</groupId>
+            <artifactId>alipay-sdk</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+        <!-- lombok 是一个 Java 库，它可以通过简单的注解来帮助开发人员消除 Java 代码中的样板代码，如 getter、setter、equals、hashCode 等
+             设置<optional>true</optional>，你可以在需要的时候使用 Lombok，而不是强制性地将它包含在项目的构建中 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+</project>
