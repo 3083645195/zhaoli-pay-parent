@@ -1,0 +1,6 @@
+zhaoli:
+  pay:
+    app-id: 123
+    app-key: 123
+    salt-key: zhaoli1
+    url: http://127.0.0.1:7070
